@@ -1,36 +1,55 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-card class="login-card">
+      <!-- divでタイトル追加 -->
+      <div class="login-title">かわいいログイン</div>
+      <el-form :model="loginForm">
+        <el-form-item label="メールアドレス" prop="email">
+          <el-input type="text" v-model="loginForm.email" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="パスワード" prop="password">
+          <el-input type="password" v-model="loginForm.password" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-button type="primary" :loading="checking" @click="handleLogin">ログイン</el-button>
+      </el-form>
+    </el-card>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  data () {
+    return {
+      checking: false,
+      loginForm: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    handleLogin () {
+      this.checking = true
+    }
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+body {
+  background-color: #fce4ec;
+}
+.login-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.login-card {
+  max-width: 800px;
+  margin: auto;
 }
 </style>
