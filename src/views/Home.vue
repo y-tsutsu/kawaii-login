@@ -1,5 +1,12 @@
 <template>
   <div id="home">
+    <lottie
+      class="login-lottie"
+      :options="heartLottie"
+      :height="300"
+      :width="300"
+      :animCreated="handleAnimation"
+    />
     <el-card class="login-card">
       <div class="login-title">かわいいログイン</div>
       <el-form :model="loginForm">
@@ -16,8 +23,14 @@
 </template>
 
 <script>
+import Lottie from '@/components/Lottie.vue'
+import * as heart from '@/assets/heart.json'
+
 export default {
   name: 'Home',
+  components: {
+    Lottie
+  },
   data () {
     return {
       checking: false,
@@ -27,7 +40,15 @@ export default {
       }
     }
   },
+  computed: {
+    heartLottie () {
+      return { animationData: heart }
+    }
+  },
   methods: {
+    handleAnimation (anim) {
+      this.anim = anim
+    },
     handleLogin () {
       this.checking = true
     }
